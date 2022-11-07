@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
+        integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+        integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
+    <style>
+        #map {
+            height: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <script>
+        var map = L.map('map').setView([30.0240, 31.1409], 12);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+        var attrOptions = {
+            prefix: ' sample'
+         };
+           // Creating an attribution
+           var attr = L.control.attribution(attrOptions);
+         attr.addTo(map);  // Adding attribution to the map
+        var marker = L.marker([30.021915, 31.244431]).addTo(map);
+       // Adding popup to the marker
+    //    marker.bindPopup('This is Tutorialspoint').openPopup();
+    //      marker.addTo(map); // Adding marker to the map
+        var marker = L.marker([29.9028166,31.2969668]).addTo(map);
+        var marker = L.marker([30.0229936,31.255213]).addTo(map);
+        //https://www.google.com/maps/dir/29.9028166,31.2969668/''/@30.0931673,31.3401022,14.24z/data=!4m9!4m8!1m1!4e1!1m5!1m1!1s0x14583e1e6d298e21:0x7f86e07d35a536fd!2m2!1d31.3350117!2d30.0950688!11m1!5shttps:%2F%2Fgoogleads.g.doubleclick.net%2Fpagead%2Fconversion%2F%3Fai%3DCewDlOhxpY87CBOeS6toPyKSeuAL30PTGbNO7zJ_TD8CNtwEQASC_rM0pYLOGgID0LaABhb_7vAHIAQmpAlbjmRUjImY-qAMByAPLBKoE1AJP0MigkH40mmysO3vNoImLVtGKI_MzzHOVS-fcwL2Lp8CDQrZ0ZFFl5yF0ptS0P-FCYhRbuy3ouDbYYOuA5a856L9M99SawPyhl0b1IOlzxOqpnf51SnHHaRLqAy-rBuKLEc6BZtOnZDzAQpct3GRXDT7PcrGtyuRLx5exZWapEBeOXa7W1kj7q7nDf6B3PyvY45rENc4a3B-7OxmBaIsIrHOrInjDlt7-MafAoZQVAVYc132KQZPHOu9UT3gWgSNxBN4fwY0cB5W2YNxnfimJNa-qPhOUZhrRCYsyCZf74zSr84q1nnpdEV-0tGwqG_P8Fx6GxIoArZqU4vgt4pZWNFljgCQfI3LwK5FQbF_iJFtnxq6yOgotQsC67WfjgOdrNh0gQq_OUTChnSGppjynFK8UIxkH55921fS6rY6pB7ZzdwNMhE0IgZjB1P-QAH6sdPfDwASu49_ytAOQBgGgBi6AB-PAhMMCiAcBkAcCqAeOzhuoB5PYG6gH7paxAqgH_p6xAqgHpKOxAqgH1ckbqAemvhuoB5oGqAfz0RuoB5bYG6gHqpuxAqgH_56xAqgH35-xAtgHANIIEggAEAIYGjIBADoHn8CAgICABLEJzJ8ffy9ygw2ACgGKCh1odHRwOi8vcG93ZXJlbGV2YXRvcnMtZWcuY29tL5gLAcgLAeALAYAMAbgMAbgTiATYEwrQFQH4FgGAFwE%26sigh%3DriVUXJLgsWg%26label%3D_AITNAME_%26value%3D_AITVALUE_
+        // Attribution options
+        function onMapClick(e) {
+        alert("You clicked the map at " + e.latlng);
+        }
+
+        map.on('click', onMapClick);
+        
+    </script>
+</body>
+
+</html>
