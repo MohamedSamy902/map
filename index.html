@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <title>Document</title>
@@ -29,23 +28,99 @@
         }).addTo(map);
         var attrOptions = {
             prefix: ' sample'
-         };
-           // Creating an attribution
-           var attr = L.control.attribution(attrOptions);
-         attr.addTo(map);  // Adding attribution to the map
+        };
+        // Creating an attribution
+        var attr = L.control.attribution(attrOptions);
+        attr.addTo(map);  // Adding attribution to the map
         var marker = L.marker([30.021915, 31.244431]).addTo(map);
-       // Adding popup to the marker
-    //    marker.bindPopup('This is Tutorialspoint').openPopup();
-    //      marker.addTo(map); // Adding marker to the map
-        var marker = L.marker([29.9028166,31.2969668]).addTo(map);
-        var marker = L.marker([30.0229936,31.255213]).addTo(map);
-        //https://www.google.com/maps/dir/29.9028166,31.2969668/''/@30.0931673,31.3401022,14.24z/data=!4m9!4m8!1m1!4e1!1m5!1m1!1s0x14583e1e6d298e21:0x7f86e07d35a536fd!2m2!1d31.3350117!2d30.0950688!11m1!5shttps:%2F%2Fgoogleads.g.doubleclick.net%2Fpagead%2Fconversion%2F%3Fai%3DCewDlOhxpY87CBOeS6toPyKSeuAL30PTGbNO7zJ_TD8CNtwEQASC_rM0pYLOGgID0LaABhb_7vAHIAQmpAlbjmRUjImY-qAMByAPLBKoE1AJP0MigkH40mmysO3vNoImLVtGKI_MzzHOVS-fcwL2Lp8CDQrZ0ZFFl5yF0ptS0P-FCYhRbuy3ouDbYYOuA5a856L9M99SawPyhl0b1IOlzxOqpnf51SnHHaRLqAy-rBuKLEc6BZtOnZDzAQpct3GRXDT7PcrGtyuRLx5exZWapEBeOXa7W1kj7q7nDf6B3PyvY45rENc4a3B-7OxmBaIsIrHOrInjDlt7-MafAoZQVAVYc132KQZPHOu9UT3gWgSNxBN4fwY0cB5W2YNxnfimJNa-qPhOUZhrRCYsyCZf74zSr84q1nnpdEV-0tGwqG_P8Fx6GxIoArZqU4vgt4pZWNFljgCQfI3LwK5FQbF_iJFtnxq6yOgotQsC67WfjgOdrNh0gQq_OUTChnSGppjynFK8UIxkH55921fS6rY6pB7ZzdwNMhE0IgZjB1P-QAH6sdPfDwASu49_ytAOQBgGgBi6AB-PAhMMCiAcBkAcCqAeOzhuoB5PYG6gH7paxAqgH_p6xAqgHpKOxAqgH1ckbqAemvhuoB5oGqAfz0RuoB5bYG6gHqpuxAqgH_56xAqgH35-xAtgHANIIEggAEAIYGjIBADoHn8CAgICABLEJzJ8ffy9ygw2ACgGKCh1odHRwOi8vcG93ZXJlbGV2YXRvcnMtZWcuY29tL5gLAcgLAeALAYAMAbgMAbgTiATYEwrQFQH4FgGAFwE%26sigh%3DriVUXJLgsWg%26label%3D_AITNAME_%26value%3D_AITVALUE_
+        // Adding popup to the marker
+        marker.bindPopup('This is Tutorialspoint').openPopup();
+        marker.addTo(map); // Adding marker to the map
+        var marker = L.marker([29.9028166, 31.2969668]).addTo(map);
+        var marker = L.marker([30.0229936, 31.255213]).addTo(map);
+
+        // Knoe
         // Attribution options
         function onMapClick(e) {
-        alert("You clicked the map at " + e.latlng);
+            alert("You clicked the map at " + e.latlng);
+        }
+        map.on('click', onMapClick);
+
+        // Markers
+        // Add some theinformation in the Markers
+        var marker = L.marker([51.5, -0.09]).addTo(map);
+        marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+
+        // Circles
+        var circle = L.circle([51.508, -0.11], {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.5,
+            radius: 500
+        }).addTo(map);
+        // Add some theinformation in the Circles
+        circle.bindPopup("I am a circle.");
+
+        // Polygons
+        var polygon = L.polygon([
+            [51.509, -0.08],
+            [51.503, -0.06],
+            [51.51, -0.047]
+        ]).addTo(map);
+        // Add some theinformation in the Polygons
+        polygon.bindPopup("I am a polygon.");
+
+
+        // Dealing with events
+        function onMapClick(e) {
+            alert("You clicked the map at " + e.latlng);
+        }
+        map.on('click', onMapClick);
+
+        var popup = L.popup();
+
+        function onMapClick(e) {
+            popup
+                .setLatLng(e.latlng)
+                .setContent("You clicked the map at " + e.latlng.toString())
+                .openOn(map);
         }
 
         map.on('click', onMapClick);
+
+        // ############# Markers With Custom Icons #############
+
+        var greenIcon = L.icon({
+            iconUrl: 'leaf-green.png',
+            shadowUrl: 'leaf-shadow.png',
+
+            iconSize: [38, 95], // size of the icon
+            shadowSize: [50, 64], // size of the shadow
+            iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
+            shadowAnchor: [4, 62],  // the same for the shadow
+            popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+        // Defining an icon class
+        L.marker([51.5, -0.09], { icon: greenIcon }).addTo(map);
+        var LeafIcon = L.Icon.extend({
+            options: {
+                shadowUrl: 'leaf-shadow.png',
+                iconSize: [38, 95],
+                shadowSize: [50, 64],
+                iconAnchor: [22, 94],
+                shadowAnchor: [4, 62],
+                popupAnchor: [-3, -76]
+            }
+        });
+
+        var greenIcon = new LeafIcon({ iconUrl: 'leaf-green.png' }),
+            redIcon = new LeafIcon({ iconUrl: 'leaf-red.png' }),
+            orangeIcon = new LeafIcon({ iconUrl: 'leaf-orange.png' });
+
+        L.icon = function (options) {
+            return new L.Icon(options);
+        };
+
         
     </script>
 </body>
